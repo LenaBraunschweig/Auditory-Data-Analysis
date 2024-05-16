@@ -1,0 +1,26 @@
+Resistors,Resistance via  color bands (?),Ohmeter Resistance (?),Voltage (v),Average Voltage (v),Trial,Calculated Total Voltage (v),Circuit,Current (amps),Resistor,Ohm's Law Resistance (?),,Resistor,Current (amps),Average Current (amps),,Total Current (amps),Resistor,Calculated Resistance (?),Resistor,Voltage (v),Average Voltage (v),Current (amps),Average current (amps),Calculated Current (amps),,
+r1,270+-5,270,1.424,1.425,1,9.94,R1 R2 R3,0.005,r1,285,,R1,0.036,0.036333333,Measured,0.065,R1,275.2293578,R1,4.26,4.253333333,0.0155,0.015333333,0.015753086,,
+,,,1.427,,2,9.97,R1 R2 R3 R4,0.0019,r2,575.3333333,,,0.0365,,Calculated,0.0656,R2,742.5742574,,4.25,,0.015,,,,
+,,,1.424,,3,9.95,,,r3,1138,,,0.0365,,,,R3,1111.111111,,4.25,,0.0155,,,,
+R2,560+-5,551,2.88,2.876666667,Average,9.953333333,,,Total,1990.666667,,R2,0.0179,0.013466667,,,R4,3658.536585,R2,5.75,5.743333333,0.0102,0.0102,0.010423472,,
+,,,2.88,,,,,,,,,,0.0045,,,,Total from measured current,153.8461538,,5.74,,0.0102,,,,
+,,,2.87,,,,,,,,,,0.018,,,,Total from Calculated resistances,162.5135428,,5.74,,0.0102,,,,
+R3,1100+-5,1089,5.69,5.69,,,,,,,,R3,0.009,0.009,,,,0.946666667,R3,5.75,5.743333333,0.005,0.005,0.005273952,,
+,,,5.69,,,,,,,,,,0.009,,,,,,,5.74,,0.005,,,,
+,,,5.69,,,,,,,,,,0.009,,,,,,,5.74,,0.005,,,,
+R4,3300+-10,3570,,,,,,,,,,R4,0.0027,0.002733333,,,,,Total Measured,4.428807339,4.422325192,0.0155,0.005917513,0.006954682,,
+,,,,,,,,,,,,,0.0028,,,,,,,4.419084118,,,,,,
+Resistors,Resistance via  color bands (?),Ohmeter Resistance (?),Voltage (v),Circuit,Current (amps),Resistor,Current (amps),,Total Current (amps),Resistor,Voltage (v),Current (amps),0.0027,,,,,,,4.419084118,,,,,,
+r1,270+-5,270,1.424,R1 R2 R3,0.005,R1,0.036,Measured,0.065,R1,4.26,0.0155,Resistors,Average Voltage (v),Trial,Calculated Total Voltage (v),Resistor,Ohm's Law Resistance (?),Calculated R4,Resistor,Current (amps),Average Current (amps),   ,Total Current (amps),Resistor,Calculated Resistance (?)
+,,,1.427,R1 R2 R3 R4,0.0019,,0.0365,Calculated,0.0656,,4.25,0.015,r1,1.425,1,9.94,r1,285,3272.491228,R1,0.036,0.036333333,Measured,0.065,R1,275.2293578
+,,,1.424,,,,0.0365,,,,4.25,0.0155,,,2,9.97,r2,575.3333333,,,0.0365,,Calculated,0.0656,R2,742.5742574
+R2,560+-5,551,2.88,,,R2,0.0179,,,R2,5.75,0.0102,,,3,9.95,r3,1138,,,0.0365,,,,R3,1111.111111
+,,,2.88,,,,0.0045,,,,5.74,0.0102,R2,2.876666667,Average,9.953333333,Total,1990.666667,,R2,0.0179,0.013466667,,,R4,3658.536585
+,,,2.87,,,,0.018,,,,5.74,0.0102,,,,,,,,,0.0045,,,,Total from measured current,153.8461538
+R3,1100+-5,1089,5.69,,,R3,0.009,,,R3,5.75,0.005,,,,,,,,,0.018,,,,Total from Calculated resistances,162.5135428
+,,,5.69,,,,0.009,,,,5.74,0.005,R3,5.69,,,,,,R3,0.009,0.009,,,,
+,,,5.69,,,,0.009,,,,5.74,0.005,,,,,,,,,0.009,,,,,
+R4,3300+-10,3570,,,,R4,0.0027,,,Total Measured,4.428807339,0.0155,,,,,,,,,0.009,,,,,
+,,,,,,,0.0028,,,,4.419084118,,,,,,,,,R4,0.0027,0.002733333,,,,
+,,,,,,,0.0027,,,,4.419084118,,,,,,,,,,0.0028,,,,,
+,,,,,,,,,,,,,,,,,,,,,0.0027,,,,,

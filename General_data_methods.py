@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 
+# current user options: long data, short data, correlation, info, row, exit, slope, and edit
+
 def upload_file():
     file = ""
     file = input("\nPlease enter the name of the CSV file: ") + ".csv"

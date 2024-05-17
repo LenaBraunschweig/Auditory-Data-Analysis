@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def upload_file():
     file = ""
@@ -20,7 +21,7 @@ def user_menu(fileName):
     # need to fix this method
     elif (user_choice == "short data"):
         rows = input("Please type how many rows you would like to see: ")
-        headortail = input("Please say type either head or tail: ")
+        headortail = input("Please type either head or tail: ")
         short_data(fileName, rows, headortail)
     elif (user_choice == "correlation"):
         print(fileName.corr())
@@ -36,12 +37,9 @@ def user_menu(fileName):
     elif (user_choice == "exit"):
         quit()
     elif (user_choice == "slope"):
-        # need to add the slope method
-        pass
+        slope_menu(fileName)
     elif (user_choice == "edit"):
         fileName = edit_columns()
-    elif (user_choice == "new file"):
-        upload_file()
     else:
         print("Not a valid option. Returning you to menu.")
     user_menu(fileName)
@@ -81,6 +79,17 @@ def edit_columns(fileName):
     else:
         print("The key you entered was invalid.")
     return new_file
+
+def slope_menu(fileName):
+    x_axis = fileName[input("Enter you x_axis: ")]
+    y_axis = fileName[input("Enter your y_axis: ")]
+    #graph_type = input("Enter the type of graph: ")
+    try:
+        # need to edit this to include the graph type
+        # the default of the 1 is a linear graph
+        print(f"The slope for your selected axes is {np.polyfit(x_axis, y_axis, 1)}.")
+    except:
+        print("One of the parameters you typed was incorrect, going back to main menu.")
 
 
 def edit(fileName, column, m_method):

@@ -39,7 +39,9 @@ def user_menu(fileName):
         # need to add the slope method
         pass
     elif (user_choice == "edit"):
-        edit_rows()
+        fileName = edit_columns()
+    elif (user_choice == "new file"):
+        upload_file()
     else:
         print("Not a valid option. Returning you to menu.")
     user_menu(fileName)
@@ -53,9 +55,9 @@ def display_stats(fileName):
     print("\nThe keys for this data set are:")
     for key in keys:
         print(key)
-    
     rows = len(fileName)
     print(f"\nThere are {rows} rows in this data spread")
+    return keys
 
 def short_data(fileName, number_rows, head_or_tail):
     if (head_or_tail == "head"):
@@ -66,9 +68,23 @@ def short_data(fileName, number_rows, head_or_tail):
         print("Not a valid response. Going back to menu.")
 
 
-def edit_rows(fileName):
-    # need to create an edit rows sub-menu
-    pass
+def edit_columns(fileName):
+    new_file = fileName
+    key = input("Which key would you like to edit: ")
+    key_list = display_stats(fileName)
+    if key in key_list:
+        whichm = input("Would you like to use mean, median, or mode? ")
+        try:
+            new_file = edit(fileName, key, whichm)
+        except:
+            print("Your selection for mean, median, or mode was invalid.")
+    else:
+        print("The key you entered was invalid.")
+    return new_file
 
+
+def edit(fileName, column, m_method):
+    fileName.fillna({column: fileName[column].m_method()}, inplace = True)
+    return fileName
 
 upload_file()

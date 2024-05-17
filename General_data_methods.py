@@ -2,12 +2,12 @@ import pandas as pd
 
 def upload_file():
     file = ""
-    file = input("\nPlease enter the name of the CSV file: ")
+    file = input("\nPlease enter the name of the CSV file: ") + ".csv"
     if file == "exit":
         exit()
     try:
         fileFrame = pd.read_csv(file)
-        display_keys(fileFrame)
+        display_stats(fileFrame)
         user_menu(fileFrame)
     except:
         print("File is not valid, please try again with a different file name.")
@@ -20,8 +20,8 @@ def user_menu(fileName):
     # need to fix this method
     elif (user_choice == "short data"):
         rows = input("Please type how many rows you would like to see: ")
-        pd.options.display.max_rows = rows
-        print(fileName)
+        headortail = input("Please say type either head or tail: ")
+        short_data(fileName, rows, headortail)
     elif (user_choice == "correlation"):
         print(fileName.corr())
     elif (user_choice == "info"):
@@ -32,7 +32,7 @@ def user_menu(fileName):
             print(fileName.loc(user_row))
         except:
             print("Row was invalid, sending back to main menu.")
-            user_menu(user_choice, fileName)
+            user_menu(fileName)
     elif (user_choice == "exit"):
         quit()
     elif (user_choice == "slope"):
@@ -45,7 +45,7 @@ def user_menu(fileName):
     user_menu(fileName)
 
 
-def display_keys(fileName):
+def display_stats(fileName):
     global keys
     keys = []
     for key in fileName.keys():
@@ -53,9 +53,18 @@ def display_keys(fileName):
     print("\nThe keys for this data set are:")
     for key in keys:
         print(key)
-    # need to display how many rows there are
+    print("\nThere are {len(fileName)} rows in this data spread")
 
-def edit_rows():
+def short_data(fileName, number_rows, head_or_tail):
+    if (head_or_tail == "head"):
+        print(fileName.head(number_rows))
+    elif (head_or_tail == "tail"):
+        print(fileName.tail(number_rows))
+    else:
+        print("Not a valid response. Going back to menu.")
+
+
+def edit_rows(fileName):
     # need to create an edit rows sub-menu
     pass
 

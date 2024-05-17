@@ -3,7 +3,7 @@ import pandas as pd
 def upload_file():
     file = ""
     file = input("\nPlease enter the name of the CSV file: ") + ".csv"
-    if file == "exit":
+    if file == "exit.csv":
         exit()
     try:
         fileFrame = pd.read_csv(file)

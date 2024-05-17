@@ -53,7 +53,9 @@ def display_stats(fileName):
     print("\nThe keys for this data set are:")
     for key in keys:
         print(key)
-    print("\nThere are {len(fileName)} rows in this data spread")
+    
+    rows = len(fileName)
+    print(f"\nThere are {rows} rows in this data spread")
 
 def short_data(fileName, number_rows, head_or_tail):
     if (head_or_tail == "head"):

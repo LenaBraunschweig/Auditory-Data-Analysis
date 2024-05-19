@@ -44,7 +44,9 @@ def user_menu(fileName):
         fileName = edit_columns()
     else:
         print("Not a valid option. Returning you to menu.")
-    user_menu(fileName)
+    
+    if (user_choice != "exit"):
+        user_menu(fileName)
 
 
 def display_stats(fileName):

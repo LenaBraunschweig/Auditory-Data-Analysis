@@ -35,19 +35,17 @@ def user_menu(fileName):
     elif (user_choice == "row"):
         user_row = int(input("Which row number would you like to see: "))
         try:
-            print(fileName.loc(user_row))
+            print("\n" + str(fileName.loc[user_row]))
         except:
             print("Row was invalid, sending back to main menu.")
-            user_menu(fileName)
     elif (user_choice == "exit"):
         exit()
     elif (user_choice == "slope"):
         slope_menu(fileName)
     elif (user_choice == "edit"):
-        fileName = edit_columns(fileName)
+        edit_columns(fileName)
     else:
         print("Not a valid option. Returning you to menu.")
-    
     if (user_choice != "exit"):
         user_menu(fileName)
 
@@ -67,26 +65,33 @@ def display_stats(fileName):
 
 def short_data(fileName, number_rows, head_or_tail):
     if (head_or_tail == "head"):
-        print(fileName.head(number_rows))
+        print("\n" + str(fileName.head(number_rows)))
     elif (head_or_tail == "tail"):
-        print(fileName.tail(number_rows))
+        print("\n" + str(fileName.tail(number_rows)))
     else:
         print("Not a valid response. Going back to menu.")
 
 
 def edit_columns(fileName):
-    new_file = fileName
     key_list = display_stats(fileName)
     key = input("Which key would you like to edit: ")
+    def edit(fileName, column, m_method):
+        if (m_method == "mean"):
+            fileName.fillna({column: fileName[column].mean()}, inplace = True)
+        elif (m_method == "median"):
+            fileName.fillna({column: fileName[column].median()}, inplace = True)
+        elif (m_method == "mode"):
+            fileName.fillna({column: fileName[column].mode()}, inplace = True)
+        print("Filed edited. Returning to main menu.")
     if key in key_list:
         whichm = input("Would you like to use mean, median, or mode? ")
-        try:
-            new_file = edit(fileName, key, whichm)
-        except:
+        if ((whichm == "mean") or (whichm == "median") or (whichm == "mode")):
+            edit(fileName, key, whichm)
+        else:
             print("Your selection for mean, median, or mode was invalid.")
     else:
         print("The key you entered was invalid.")
-    return new_file
+
 
 def slope_menu(fileName):
     x_axis = fileName[input("Enter you x_axis: ")]
@@ -98,10 +103,5 @@ def slope_menu(fileName):
         print(f"The slope for your selected axes is {np.polyfit(x_axis, y_axis, 1)}.")
     except:
         print("One of the parameters you typed was incorrect, going back to main menu.")
-
-
-def edit(fileName, column, m_method):
-    fileName.fillna({column: fileName[column].m_method()}, inplace = True)
-    return fileName
 
 upload_file()

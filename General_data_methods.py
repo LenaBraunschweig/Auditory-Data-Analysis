@@ -14,7 +14,6 @@ def upload_file():
         print("File is not valid, please try again with a different file name.")
         upload_file()
     display_stats(fileFrame)
-    # gotta change location of the method below
     user_menu(fileFrame)
 
 def user_menu(fileName):
@@ -22,7 +21,11 @@ def user_menu(fileName):
     if (user_choice == "long data"):
         print(fileName.to_string())
     elif (user_choice == "short data"):
-        rows = input("Please type how many rows you would like to see: ")
+        try:
+            rows = int(input("Please type how many rows you would like to see: "))
+        except:
+            print("Not an integer, sending you back to main menu.")
+            user_menu(fileName)
         headortail = input("Please type either head or tail: ")
         short_data(fileName, rows, headortail)
     elif (user_choice == "correlation"):
@@ -30,7 +33,7 @@ def user_menu(fileName):
     elif (user_choice == "info"):
         print(fileName.info())
     elif (user_choice == "row"):
-        user_row = input("Which row number would you like to see: ")
+        user_row = int(input("Which row number would you like to see: "))
         try:
             print(fileName.loc(user_row))
         except:
@@ -61,6 +64,7 @@ def display_stats(fileName):
     print(f"\nThere are {rows} rows in this data spread")
     return keys
 
+
 def short_data(fileName, number_rows, head_or_tail):
     if (head_or_tail == "head"):
         print(fileName.head(number_rows))
@@ -72,8 +76,8 @@ def short_data(fileName, number_rows, head_or_tail):
 
 def edit_columns(fileName):
     new_file = fileName
-    key = input("Which key would you like to edit: ")
     key_list = display_stats(fileName)
+    key = input("Which key would you like to edit: ")
     if key in key_list:
         whichm = input("Would you like to use mean, median, or mode? ")
         try:

@@ -7,7 +7,7 @@ def upload_file():
     file = ""
     file = input("\nPlease enter the name of the CSV file: ") + ".csv"
     if file == "exit.csv":
-        quit()
+        exit()
     try:
         fileFrame = pd.read_csv(file)
         display_stats(fileFrame)
@@ -37,7 +37,7 @@ def user_menu(fileName):
             print("Row was invalid, sending back to main menu.")
             user_menu(fileName)
     elif (user_choice == "exit"):
-        quit()
+        exit()
     elif (user_choice == "slope"):
         slope_menu(fileName)
     elif (user_choice == "edit"):

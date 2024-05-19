@@ -10,11 +10,12 @@ def upload_file():
         exit()
     try:
         fileFrame = pd.read_csv(file)
-        display_stats(fileFrame)
-        user_menu(fileFrame)
     except:
         print("File is not valid, please try again with a different file name.")
         upload_file()
+    display_stats(fileFrame)
+    # gotta change location of the method below
+    user_menu(fileFrame)
 
 def user_menu(fileName):
     user_choice = input("\nPlease type out what you would like to do with this data: ")

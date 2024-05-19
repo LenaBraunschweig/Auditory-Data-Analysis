@@ -11,10 +11,7 @@ def upload_file():
     try:
         fileFrame = pd.read_csv(file)
         display_stats(fileFrame)
-        try:
-            user_menu(fileFrame)
-        except:
-            pass
+        user_menu(fileFrame)
     except:
         print("File is not valid, please try again with a different file name.")
         upload_file()

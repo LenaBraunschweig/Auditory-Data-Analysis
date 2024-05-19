@@ -11,7 +11,10 @@ def upload_file():
     try:
         fileFrame = pd.read_csv(file)
         display_stats(fileFrame)
-        user_menu(fileFrame)
+        try:
+            user_menu(fileFrame)
+        except:
+            pass
     except:
         print("File is not valid, please try again with a different file name.")
         upload_file()
@@ -20,7 +23,6 @@ def user_menu(fileName):
     user_choice = input("\nPlease type out what you would like to do with this data: ")
     if (user_choice == "long data"):
         print(fileName.to_string())
-    # need to fix this method
     elif (user_choice == "short data"):
         rows = input("Please type how many rows you would like to see: ")
         headortail = input("Please type either head or tail: ")
@@ -41,7 +43,7 @@ def user_menu(fileName):
     elif (user_choice == "slope"):
         slope_menu(fileName)
     elif (user_choice == "edit"):
-        fileName = edit_columns()
+        fileName = edit_columns(fileName)
     else:
         print("Not a valid option. Returning you to menu.")
     

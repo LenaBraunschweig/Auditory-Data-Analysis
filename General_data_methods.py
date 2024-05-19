@@ -7,7 +7,7 @@ def upload_file():
     file = ""
     file = input("\nPlease enter the name of the CSV file: ") + ".csv"
     if file == "exit.csv":
-        exit()
+        quit()
     try:
         fileFrame = pd.read_csv(file)
         display_stats(fileFrame)

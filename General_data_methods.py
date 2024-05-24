@@ -28,8 +28,12 @@ def user_menu(fileName):
             user_menu(fileName)
         headortail = input("Please type either head or tail: ")
         short_data(fileName, rows, headortail)
-    elif (user_choice == "correlation"):
-        print(fileName.corr())
+    elif (user_choice == "corr"):
+        try:
+            print(fileName.corr())
+        except:
+            print("The data is not all integers, so correlations can't be made.")
+            print("Returning to main menu.")
     elif (user_choice == "info"):
         print(fileName.info())
     elif (user_choice == "row"):
@@ -96,11 +100,9 @@ def edit_columns(fileName):
 def slope_menu(fileName):
     x_axis = fileName[input("Enter you x_axis: ")]
     y_axis = fileName[input("Enter your y_axis: ")]
-    #graph_type = input("Enter the type of graph: ")
+    graph_degree = input("Enter the degree of the formula: ")
     try:
-        # need to edit this to include the graph type
-        # the default of the 1 is a linear graph
-        print(f"The slope for your selected axes is {np.polyfit(x_axis, y_axis, 1)}.")
+        print(f"The slope for your selected axes is {np.polyfit(x_axis, y_axis, graph_degree)}.")
     except:
         print("One of the parameters you typed was incorrect, going back to main menu.")
 

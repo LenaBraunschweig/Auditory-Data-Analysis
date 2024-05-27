@@ -21,27 +21,13 @@ def user_menu(fileName):
     if (user_choice == "long data"):
         print(fileName.to_string())
     elif (user_choice == "short data"):
-        try:
-            rows = int(input("Please type how many rows you would like to see: "))
-        except:
-            print("Not an integer, sending you back to main menu.")
-            user_menu(fileName)
-        headortail = input("Please type either head or tail: ")
-        short_data(fileName, rows, headortail)
+        short_data_menu(fileName)
     elif (user_choice == "corr"):
-        try:
-            print(fileName.corr())
-        except:
-            print("The data is not all integers, so correlations can't be made.")
-            print("Returning to main menu.")
+        corr_menu(fileName)
     elif (user_choice == "info"):
         print(fileName.info())
     elif (user_choice == "row"):
-        user_row = int(input("Which row number would you like to see: "))
-        try:
-            print("\n" + str(fileName.loc[user_row]))
-        except:
-            print("Row was invalid, sending back to main menu.")
+        row_menu(fileName)
     elif (user_choice == "exit"):
         exit()
     elif (user_choice == "slope" or user_choice == "intercept"):
@@ -50,63 +36,88 @@ def user_menu(fileName):
         edit_columns(fileName)
     else:
         print("Not a valid option. Returning you to menu.")
+    
     if (user_choice != "exit"):
         user_menu(fileName)
 
 
-def display_stats(fileName):
+def display_stats(userFile):
     global keys
     keys = []
-    for key in fileName.keys():
+    for key in userFile.keys():
         keys.append(key)
     print("\nThe keys for this data set are:")
     for key in keys:
         print(key)
-    rows = len(fileName)
+    rows = len(userFile)
     print(f"\nThere are {rows} rows in this data spread")
     return keys
 
 
-def short_data(fileName, number_rows, head_or_tail):
-    if (head_or_tail == "head"):
-        print("\n" + str(fileName.head(number_rows)))
-    elif (head_or_tail == "tail"):
-        print("\n" + str(fileName.tail(number_rows)))
-    else:
-        print("Not a valid response. Going back to menu.")
+def short_data_menu(userFile):
+    def short_data(userFile, number_rows, head_or_tail):
+        if (head_or_tail == "head"):
+            print("\n" + str(userFile.head(number_rows)))
+        elif (head_or_tail == "tail"):
+            print("\n" + str(userFile.tail(number_rows)))
+        else:
+            print("Not a valid response. Going back to menu.")
+    try:
+            rows = int(input("Please type how many rows you would like to see: "))
+    except:
+        print("Not an integer, sending you back to main menu.")
+        user_menu(userFile)
+    headortail = input("Please type either head or tail: ")
+    short_data(userFile, rows, headortail)
 
 
-def edit_columns(fileName):
-    key_list = display_stats(fileName)
+def corr_menu(userFile):
+    try:
+        print(userFile.corr())
+    except:
+        print("The data is not all integers, so correlations can't be made.")
+        print("Returning to main menu.")
+
+
+def row_menu(userFile):
+    user_row = int(input("Which row number would you like to see: "))
+    try:
+        print("\n" + str(userFile.loc[user_row]))
+    except:
+        print("Row was invalid, sending back to main menu.")
+
+
+def edit_columns(userFile):
+    key_list = display_stats(userFile)
     key = input("Which key would you like to edit: ")
-    def edit(fileName, column, m_method):
+    def edit(userFile, column, m_method):
         if (m_method == "mean"):
-            fileName.fillna({column: fileName[column].mean()}, inplace = True)
+            userFile.fillna({column: userFile[column].mean()}, inplace = True)
         elif (m_method == "median"):
-            fileName.fillna({column: fileName[column].median()}, inplace = True)
+            userFile.fillna({column: userFile[column].median()}, inplace = True)
         elif (m_method == "mode"):
-            fileName.fillna({column: fileName[column].mode()}, inplace = True)
+            userFile.fillna({column: userFile[column].mode()}, inplace = True)
         print("Filed edited. Returning to main menu.")
     if key in key_list:
         whichm = input("Would you like to use mean, median, or mode? ")
         if ((whichm == "mean") or (whichm == "median") or (whichm == "mode")):
-            edit(fileName, key, whichm)
+            edit(userFile, key, whichm)
         else:
             print("Your selection for mean, median, or mode was invalid.")
     else:
         print("The key you entered was invalid.")
 
 
-def slope_menu(fileName, choice):
+def slope_menu(userFile, choice):
     x_axis = input("Enter your x_axis: ")
     y_axis = input("Enter your y_axis: ")
     if x_axis in keys and y_axis in keys:
         try:
             graph_degree = int(input("Enter the degree of the formula: "))
             if choice == "slope":
-                print(f"The slope for your selected axes is {np.polyfit(fileName[x_axis], fileName[y_axis], graph_degree)[0]}.")
+                print(f"The slope for your selected axes is {np.polyfit(userFile[x_axis], userFile[y_axis], graph_degree)[0]}.")
             else:
-                print(f"The intercept for your selected axes is {np.polyfit(fileName[x_axis], fileName[y_axis], graph_degree)[1]}.")
+                print(f"The intercept for your selected axes is {np.polyfit(userFile[x_axis], userFile[y_axis], graph_degree)[1]}.")
         except:
             print("One of the parameters you typed was incorrect, going back to main menu.")
     else:

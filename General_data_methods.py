@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-# current user options: long data, short data, correlation, info, row, exit, slope, and edit
+# current user options: long data, short data, correlation, info, row, edit, slope, intercept, and exit
 
 def upload_file():
     file = ""
@@ -44,8 +44,8 @@ def user_menu(fileName):
             print("Row was invalid, sending back to main menu.")
     elif (user_choice == "exit"):
         exit()
-    elif (user_choice == "slope"):
-        slope_menu(fileName)
+    elif (user_choice == "slope" or user_choice == "intercept"):
+        slope_menu(fileName, user_choice)
     elif (user_choice == "edit"):
         edit_columns(fileName)
     else:
@@ -97,13 +97,19 @@ def edit_columns(fileName):
         print("The key you entered was invalid.")
 
 
-def slope_menu(fileName):
-    x_axis = fileName[input("Enter you x_axis: ")]
-    y_axis = fileName[input("Enter your y_axis: ")]
-    graph_degree = input("Enter the degree of the formula: ")
-    try:
-        print(f"The slope for your selected axes is {np.polyfit(x_axis, y_axis, graph_degree)}.")
-    except:
+def slope_menu(fileName, choice):
+    x_axis = input("Enter your x_axis: ")
+    y_axis = input("Enter your y_axis: ")
+    if x_axis in keys and y_axis in keys:
+        try:
+            graph_degree = int(input("Enter the degree of the formula: "))
+            if choice == "slope":
+                print(f"The slope for your selected axes is {np.polyfit(fileName[x_axis], fileName[y_axis], graph_degree)[0]}.")
+            else:
+                print(f"The intercept for your selected axes is {np.polyfit(fileName[x_axis], fileName[y_axis], graph_degree)[1]}.")
+        except:
+            print("One of the parameters you typed was incorrect, going back to main menu.")
+    else:
         print("One of the parameters you typed was incorrect, going back to main menu.")
 
 upload_file()

@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-file = 'Data.csv'
+file = 'data.csv'
 file_reader = pd.read_csv(file)
 
 x_axis = file_reader['Duration']
@@ -127,12 +127,12 @@ def record_pattern(linked):
     else:
       if ((current.frequency != current.prior.frequency) or (current.byte_sample != current.prior.byte_sample)):
         space = 0
+        current_guess += 1
         pattern_dict[current_guess] = np.zeros((offset * (len(linked) - 1), 2))
       pattern_dict[current_guess][(offset*space):(offset*(space + 1)), 0] = current.y_val
       pattern_dict[current_guess][(offset*space):(offset*(space + 1)), 1] = current.x_val
       space += 1
     current = current.next
-    current_guess += 1
   return pattern_dict
 
 # method to edit the points in each of the numpy arrays

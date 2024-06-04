@@ -1,4 +1,5 @@
 import pandas as pd
+import simpleaudio as sa
 import numpy as np
 
 file = 'data.csv'
@@ -87,7 +88,8 @@ class LinkedList:
       current = self.head.next
       while (xval > current.x_val):
         current = current.next
-      current = current.prior
+      while ((current.next != self.head) and (current.x_val == xval) and (current.y_val < yval)):
+        current = current.next
       node = LinkedList.Node(xval, yval, prior = current, next = current.next)
       current.next.prior = node
       current.next = node
@@ -105,41 +107,48 @@ class LinkedList:
       yield [node.x_val, node.y_val, node.frequency, node.byte_sample]
       node = node.next
 
-
-# create a linked list with the x and y values from the data
-data = LinkedList()
-for i in range(len(x_axis)):
-  data.insert(x_axis[i], y_axis[i])
-
-print(data)
-print(len(data))
-
 #use pattern detection in class to sort through and create a dictionary with matching frequency, channels, and bytes
 def record_pattern(linked):
   pattern_dict = {}
   current_guess = 0
   space = 0
-  offset = 1
+  time =  200
   current = linked.head.next
   while (current is not linked.head):
     if (current.prior == linked.head):
-      pattern_dict[current_guess] = np.zeros((offset * (len(linked) - 1),2))
+      pattern_dict[current_guess] = np.zeros((time * (len(linked) - 1), 2))
     else:
       if ((current.frequency != current.prior.frequency) or (current.byte_sample != current.prior.byte_sample)):
         space = 0
         current_guess += 1
-        pattern_dict[current_guess] = np.zeros((offset * (len(linked) - 1), 2))
-      pattern_dict[current_guess][(offset*space):(offset*(space + 1)), 0] = current.y_val
-      pattern_dict[current_guess][(offset*space):(offset*(space + 1)), 1] = current.x_val
+        pattern_dict[current_guess] = np.zeros((time * (len(linked) - 1), 2))
+      pattern_dict[current_guess][(time*space):(time*(space + 1)), 0] = round(current.y_val)
+      pattern_dict[current_guess][(time*space):(time*(space + 1)), 1] = round(current.x_val)
       space += 1
     current = current.next
   return pattern_dict
 
+
 # method to edit the points in each of the numpy arrays
 def edit_points(pattern_dict):
   for nump in pattern_dict:
-    pass
+    pattern_dict.get(nump)[0] *= round((32767 / max(pattern_dict.get(nump)[0])), 0)
+    pattern_dict.get(nump)[1] *= round((32767 / max(pattern_dict.get(nump)[1])), 0)
+  return pattern_dict
 
 
-# call the create dict and edit 
-print(record_pattern(data))
+#plays the edited points
+def play_points(pattern_dict):
+  for nump in pattern_dict:
+    play_obj = sa.play_buffer(pattern_dict.get(nump), 2, 2, 8000)
+    play_obj.wait_done()
+
+# create a linked list with the x and y values from the data
+def create_linked():
+  data = LinkedList()
+  for i in range(len(x_axis)):
+    data.insert(x_axis[i], y_axis[i])
+  play_points(edit_points(record_pattern(data)))
+
+# call the create dict and edit
+create_linked()

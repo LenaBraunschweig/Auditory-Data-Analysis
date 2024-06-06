@@ -3,7 +3,7 @@ from astropy.table import Table
 from astronify.series import SoniSeries
 import pandas as pd
 
-file_reader = pd.read_csv("data.csv")
+file_reader = pd.read_csv("Data.csv")
 x_axis = file_reader['Duration']
 y_axis = file_reader['Pulse']
 

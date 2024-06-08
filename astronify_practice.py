@@ -3,7 +3,7 @@ from astropy.table import Table
 from astronify.series import SoniSeries
 import pandas as pd
 
-file_reader = pd.read_csv("PhysLab01.csv")
+file_reader = pd.read_csv("Phys221Lab01.csv")
 x_name = 'R'
 y_name = 'Theta'
 

@@ -9,7 +9,7 @@ def upload_file():
     if file == "exit.csv":
         exit()
     try:
-        fileFrame = pd.read_csv(file)
+        fileFrame = pd.read_csv(file, index_col = 0)
     except:
         print("File is not valid, please try again with a different file name.")
         upload_file()

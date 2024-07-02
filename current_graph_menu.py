@@ -223,5 +223,4 @@ def table_xvals(file):
 
   play_points(edit_points(create_numpy(create_lists())))
 
-
 graph_menu(file_reader, "table")

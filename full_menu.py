@@ -139,10 +139,10 @@ def slope_menu(userFile, choice):
 def graph_menu(userFile, userChoice):
   tbl = ''
   if (userChoice == "table"):
-    #try:
-    table_xvals(userFile)
-    '''except:
-      print("Returning to main menu.")'''
+    try:
+      table_xvals(userFile)
+    except:
+      print("Returning to main menu.")
   else:
     if (userChoice == "regular"):
       tbl = regular_xvals(userFile)
@@ -351,7 +351,7 @@ def table_xvals(fileName):
   def edit_points(pattern_dict):
     for nump in pattern_dict:
       for item in nump:
-        item *= round((32767 / max(nump[0])), 0)
+        item *= round((32767 / max(nump[:, 0])), 0)
     return pattern_dict
 
   def play_points(nump_list):
